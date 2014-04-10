@@ -68,7 +68,7 @@ public class HuffTable {
     DataInputStream dis;
 
     // Constructor Method
-    protected HuffTable(final DataInputStream d, final int l) {
+    public HuffTable(final DataInputStream d, final int l) {
         this.dis = d;
         // System.out.println("L�nge="+l);
         // Get table data from input stream

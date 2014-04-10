@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/I:/IF/TCC/JavaSteganoLibrary/src/stegano/f5/Extract.java</file>
-            <file>file:/I:/IF/TCC/JavaSteganoLibrary/src/stegano/f5/Embed.java</file>
+            <file>file:/home/ricardo/NetBeansProjects/JavaSteganoLibrary/src/stegano/image/Bmp.java</file>
+            <file>file:/home/ricardo/NetBeansProjects/JavaSteganoLibrary/src/stegano/f5/Extract.java</file>
+            <file>file:/home/ricardo/NetBeansProjects/JavaSteganoLibrary/src/stegano/crypt/F5Random.java</file>
+            <file>file:/home/ricardo/NetBeansProjects/JavaSteganoLibrary/src/stegano/f5/Embed.java</file>
+            <file>file:/home/ricardo/NetBeansProjects/JavaSteganoLibrary/src/stegano/crypt/Permutation.java</file>
         </group>
     </open-files>
 </project-private>

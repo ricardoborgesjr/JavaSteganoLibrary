@@ -22,30 +22,30 @@ class DCT {
     /**
      * DCT Block Size - default 8
      */
-    protected int N = 8;
+    public int N = 8;
 
     /**
      * Image Quality (0-100) - default 80 (good image / good compression)
      */
-    protected int QUALITY = 80;
+    public int QUALITY = 80;
 
-    protected Object quantum[] = new Object[2];
+    public Object quantum[] = new Object[2];
 
-    protected Object Divisors[] = new Object[2];
+    public Object Divisors[] = new Object[2];
 
     /**
      * Quantitization Matrix for luminace.
      */
-    protected int quantum_luminance[] = new int[this.N * this.N];
+    public int quantum_luminance[] = new int[this.N * this.N];
 
-    protected double DivisorsLuminance[] = new double[this.N * this.N];
+    public double DivisorsLuminance[] = new double[this.N * this.N];
 
     /**
      * Quantitization Matrix for chrominance.
      */
-    protected int quantum_chrominance[] = new int[this.N * this.N];
+    public int quantum_chrominance[] = new int[this.N * this.N];
 
-    protected double DivisorsChrominance[] = new double[this.N * this.N];
+    public double DivisorsChrominance[] = new double[this.N * this.N];
 
     /**
      * Constructs a new DCT object. Initializes the cosine transform matrix
@@ -56,7 +56,7 @@ class DCT {
      * 
      * @param QUALITY The quality of the image (0 worst - 100 best)
      */
-    protected DCT(final int QUALITY) {
+    public DCT(final int QUALITY) {
         initMatrix(QUALITY);
     }
 
@@ -64,7 +64,7 @@ class DCT {
      * This method preforms a DCT on a block of image data using the AAN method
      * as implemented in the IJG Jpeg-6a library.
      */
-    protected double[][] forwardDCT(final float input[][]) {
+    public double[][] forwardDCT(final float input[][]) {
         final double output[][] = new double[this.N][this.N];
         double tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
         double tmp10, tmp11, tmp12, tmp13;
@@ -175,7 +175,7 @@ class DCT {
     // For now the final output is unusable. The associated quantization step
     // needs some tweaking. If you get this part working, please let me know.
 
-    protected double[][] forwardDCTExtreme(final float input[][]) {
+    public double[][] forwardDCTExtreme(final float input[][]) {
         final double output[][] = new double[this.N][this.N];
         final double tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
         final double tmp10, tmp11, tmp12, tmp13;
@@ -202,7 +202,7 @@ class DCT {
      * This method sets up the quantization matrix for luminance and chrominance
      * using the Quality parameter.
      */
-    protected void initMatrix(final int quality) {
+    private void initMatrix(final int quality) {
         final double[] AANscaleFactor = {
                 1.0, 1.387039845, 1.306562965, 1.175875602, 1.0, 0.785694958, 0.541196100, 0.275899379 };
         int i;
@@ -430,7 +430,7 @@ class DCT {
     /*
      * This method quantitizes data and rounds it to the nearest integer.
      */
-    protected int[] quantizeBlock(final double inputData[][], final int code) {
+    public int[] quantizeBlock(final double inputData[][], final int code) {
         final int outputData[] = new int[this.N * this.N];
         int i, j;
         int index;
@@ -452,7 +452,7 @@ class DCT {
      * This is the method for quantizing a block DCT'ed with forwardDCTExtreme
      * This method quantitizes data and rounds it to the nearest integer.
      */
-    protected int[] quantizeBlockExtreme(final double inputData[][], final int code) {
+    public int[] quantizeBlockExtreme(final double inputData[][], final int code) {
         final int outputData[] = new int[this.N * this.N];
         int i, j;
         int index;

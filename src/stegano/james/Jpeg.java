@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Jpeg {
-    protected static void main(final String args[]) {
+    public static void main(final String args[]) {
         Image image = null;
         FileOutputStream dataOut = null;
         File file, outFile;
@@ -70,7 +70,7 @@ public class Jpeg {
         System.exit(0);
     }
 
-    protected static void StandardUsage() {
+    public static void StandardUsage() {
         System.out.println("JpegEncoder for Java(tm) Version 0.9");
         System.out.println("");
         System.out.println("Program usage: java Jpeg \"InputImage\".\"ext\" Quality [\"OutputFile\"[.jpg]]");
@@ -90,5 +90,6 @@ public class Jpeg {
         System.out.println("Copyright 1998 BioElectroMech and James R. Weeks.  Portions copyright IJG and");
         System.out.println("  Florian Raemy, LCAV.  See license.txt for details.");
         System.out.println("Visit BioElectroMech at www.obrador.com.  Email James@obrador.com.");
+        System.exit(0);
     }
 }

@@ -17,8 +17,6 @@ import java.io.*;
  */
 
 
-
-
 public class Embed
 {
     public static void embed(File file, File embFile, File outFile, String password, int quality) {

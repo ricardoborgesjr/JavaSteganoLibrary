@@ -16,49 +16,49 @@ package stegano.james;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Vector;
 
 class Huffman {
     int bufferPutBits, bufferPutBuffer;
 
-    protected int ImageHeight;
+    public int ImageHeight;
 
-    protected int ImageWidth;
+    public int ImageWidth;
 
-    protected int DC_matrix0[][];
+    public int DC_matrix0[][];
 
-    protected int AC_matrix0[][];
+    public int AC_matrix0[][];
 
-    protected int DC_matrix1[][];
+    public int DC_matrix1[][];
 
-    protected int AC_matrix1[][];
+    public int AC_matrix1[][];
 
-    protected Object DC_matrix[];
+    public Object DC_matrix[];
 
-    protected Object AC_matrix[];
+    public Object AC_matrix[];
 
-    protected int code;
+    public int code;
 
-    protected int NumOfDCTables;
+    public int NumOfDCTables;
 
-    protected int NumOfACTables;
+    public int NumOfACTables;
 
-    protected int[] bitsDCluminance = {
+    public int[] bitsDCluminance = {
             0x00, 0, 1, 5, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
 
-    protected int[] valDCluminance = {
+    public int[] valDCluminance = {
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 
-    protected int[] bitsDCchrominance = {
+    public int[] bitsDCchrominance = {
             0x01, 0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 };
 
-    protected int[] valDCchrominance = {
+    public int[] valDCchrominance = {
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 
-    protected int[] bitsACluminance = {
+    public int[] bitsACluminance = {
             0x10, 0, 2, 1, 3, 3, 2, 4, 3, 5, 5, 4, 4, 0, 0, 1, 0x7d };
 
-    protected int[] valACluminance = {
+    public int[] valACluminance = {
             0x01, 0x02, 0x03, 0x00, 0x04, 0x11, 0x05, 0x12, 0x21, 0x31, 0x41, 0x06, 0x13, 0x51, 0x61, 0x07, 0x22, 0x71,
             0x14, 0x32, 0x81, 0x91, 0xa1, 0x08, 0x23, 0x42, 0xb1, 0xc1, 0x15, 0x52, 0xd1, 0xf0, 0x24, 0x33, 0x62, 0x72,
             0x82, 0x09, 0x0a, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x34, 0x35, 0x36, 0x37,
@@ -69,10 +69,10 @@ class Huffman {
             0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xd2, 0xd3, 0xd4, 0xd5, 0xd6, 0xd7, 0xd8, 0xd9, 0xda, 0xe1, 0xe2,
             0xe3, 0xe4, 0xe5, 0xe6, 0xe7, 0xe8, 0xe9, 0xea, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa };
 
-    protected int[] bitsACchrominance = {
+    public int[] bitsACchrominance = {
             0x11, 0, 2, 1, 2, 4, 4, 3, 4, 7, 5, 4, 4, 0, 1, 2, 0x77 };;
 
-    protected int[] valACchrominance = {
+    public int[] valACchrominance = {
             0x00, 0x01, 0x02, 0x03, 0x11, 0x04, 0x05, 0x21, 0x31, 0x06, 0x12, 0x41, 0x51, 0x07, 0x61, 0x71, 0x13, 0x22,
             0x32, 0x81, 0x08, 0x14, 0x42, 0x91, 0xa1, 0xb1, 0xc1, 0x09, 0x23, 0x33, 0x52, 0xf0, 0x15, 0x62, 0x72, 0xd1,
             0x0a, 0x16, 0x24, 0x34, 0xe1, 0x25, 0xf1, 0x17, 0x18, 0x19, 0x1a, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x35, 0x36,
@@ -83,15 +83,15 @@ class Huffman {
             0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xd2, 0xd3, 0xd4, 0xd5, 0xd6, 0xd7, 0xd8, 0xd9, 0xda,
             0xe2, 0xe3, 0xe4, 0xe5, 0xe6, 0xe7, 0xe8, 0xe9, 0xea, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa };
 
-    protected ArrayList<int[]> bits;
+    public Vector<int[]> bits;
 
-    protected ArrayList<int[]> val;
+    public Vector<int[]> val;
 
     /*
      * jpegNaturalOrder[i] is the natural-order position of the i'th element of
      * zigzag order.
      */
-    protected static int[] jpegNaturalOrder = {
+    public static int[] jpegNaturalOrder = {
             0, 1, 8, 16, 9, 2, 3, 10, 17, 24, 32, 25, 18, 11, 4, 5, 12, 19, 26, 33, 40, 48, 41, 34, 27, 20, 13, 6, 7,
             14, 21, 28, 35, 42, 49, 56, 57, 50, 43, 36, 29, 22, 15, 23, 30, 37, 44, 51, 58, 59, 52, 45, 38, 31, 39, 46,
             53, 60, 61, 54, 47, 55, 62, 63, };
@@ -99,25 +99,25 @@ class Huffman {
     /*
      * The Huffman class constructor
      */
-    protected Huffman(final int Width, final int Height) {
+    public Huffman(final int Width, final int Height) {
 
-        this.bits = new ArrayList<int[]>();
-        this.bits.add(this.bitsDCluminance);
-        this.bits.add(this.bitsACluminance);
-        this.bits.add(this.bitsDCchrominance);
-        this.bits.add(this.bitsACchrominance);
-        this.val = new ArrayList<int[]>();
-        this.val.add(this.valDCluminance);
-        this.val.add(this.valACluminance);
-        this.val.add(this.valDCchrominance);
-        this.val.add(this.valACchrominance);
+        this.bits = new Vector<int[]>();
+        this.bits.addElement(this.bitsDCluminance);
+        this.bits.addElement(this.bitsACluminance);
+        this.bits.addElement(this.bitsDCchrominance);
+        this.bits.addElement(this.bitsACchrominance);
+        this.val = new Vector<int[]>();
+        this.val.addElement(this.valDCluminance);
+        this.val.addElement(this.valACluminance);
+        this.val.addElement(this.valDCchrominance);
+        this.val.addElement(this.valACchrominance);
         initHuf();
         this.ImageWidth = Width;
         this.ImageHeight = Height;
 
     }
 
-    protected void bufferIt(final BufferedOutputStream outStream, final int code, final int size) {
+    void bufferIt(final BufferedOutputStream outStream, final int code, final int size) {
         int PutBuffer = code;
         int PutBits = this.bufferPutBits;
 
@@ -151,7 +151,7 @@ class Huffman {
     // Uses an integer long (32 bits) buffer to store the Huffman encoded bits
     // and sends them to outStream by the byte.
 
-    protected void flushBuffer(final BufferedOutputStream outStream) {
+    void flushBuffer(final BufferedOutputStream outStream) {
         int PutBuffer = this.bufferPutBuffer;
         int PutBits = this.bufferPutBits;
         while (PutBits >= 8) {
@@ -186,7 +186,7 @@ class Huffman {
      * data.
      **/
 
-    protected void HuffmanBlockEncoder(final BufferedOutputStream outStream, final int zigzag[], final int prec,
+    public void HuffmanBlockEncoder(final BufferedOutputStream outStream, final int zigzag[], final int prec,
             final int DCcode, final int ACcode) {
         int temp, temp2, nbits, k, r, i;
 
@@ -253,7 +253,7 @@ class Huffman {
      * code results in the same tables created in the IJG Jpeg-6a library.
      */
 
-    protected void initHuf() {
+    public void initHuf() {
         this.DC_matrix0 = new int[12][2];
         this.DC_matrix1 = new int[12][2];
         this.AC_matrix0 = new int[255][2];

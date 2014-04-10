@@ -25,64 +25,64 @@ import java.awt.image.PixelGrabber;
 class JpegInfo {
     String Comment;
 
-    protected Image imageobj;
+    public Image imageobj;
 
-    protected int imageHeight;
+    public int imageHeight;
 
-    protected int imageWidth;
+    public int imageWidth;
 
-    protected int BlockWidth[];
+    public int BlockWidth[];
 
-    protected int BlockHeight[];
+    public int BlockHeight[];
 
     // the following are set as the default
-    protected int Precision = 8;
+    public int Precision = 8;
 
-    protected int NumberOfComponents = 3;
+    public int NumberOfComponents = 3;
 
-    protected Object Components[];
+    public Object Components[];
 
-    protected int[] CompID = {
+    public int[] CompID = {
             1, 2, 3 };
 
     // public int[] HsampFactor = {1, 1, 1};
     // public int[] VsampFactor = {1, 1, 1};
-    protected int[] HsampFactor = {
+    public int[] HsampFactor = {
             2, 1, 1 };
 
-    protected int[] VsampFactor = {
+    public int[] VsampFactor = {
             2, 1, 1 };
 
-    protected int[] QtableNumber = {
+    public int[] QtableNumber = {
             0, 1, 1 };
 
-    protected int[] DCtableNumber = {
+    public int[] DCtableNumber = {
             0, 1, 1 };
 
-    protected int[] ACtableNumber = {
+    public int[] ACtableNumber = {
             0, 1, 1 };
 
-    protected boolean[] lastColumnIsDummy = {
+    public boolean[] lastColumnIsDummy = {
             false, false, false };
 
-    protected boolean[] lastRowIsDummy = {
+    public boolean[] lastRowIsDummy = {
             false, false, false };
 
-    protected int Ss = 0;
+    public int Ss = 0;
 
-    protected int Se = 63;
+    public int Se = 63;
 
-    protected int Ah = 0;
+    public int Ah = 0;
 
-    protected int Al = 0;
+    public int Al = 0;
 
-    protected int compWidth[], compHeight[];
+    public int compWidth[], compHeight[];
 
-    protected int MaxHsampFactor;
+    public int MaxHsampFactor;
 
-    protected int MaxVsampFactor;
+    public int MaxVsampFactor;
 
-    protected JpegInfo(final Image image, final String comment) {
+    public JpegInfo(final Image image, final String comment) {
         this.Components = new Object[this.NumberOfComponents];
         this.compWidth = new int[this.NumberOfComponents];
         this.compHeight = new int[this.NumberOfComponents];

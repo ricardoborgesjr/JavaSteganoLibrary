@@ -8,37 +8,37 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Bmp {
-    private int iDataOffset;
+    int iDataOffset;
 
-    private int pixel[] = null;
+    int pixel[] = null;
 
-    private BufferedInputStream imageFile;
+    BufferedInputStream imageFile;
 
-    private int bfSize;
+    int bfSize;
 
-    private int bfOffBits;
+    int bfOffBits;
 
-    private int biSize;
+    int biSize;
 
-    private int biWidth;
+    int biWidth;
 
-    private int biHeight;
+    int biHeight;
 
-    private int biPlanes;
+    int biPlanes;
 
-    private int biBitCount;
+    int biBitCount;
 
-    private int biCompression;
+    int biCompression;
 
-    private int biSizeImage;
+    int biSizeImage;
 
-    private int biXPelsPerMeter;
+    int biXPelsPerMeter;
 
-    private int biYPelsPerMeter;
+    int biYPelsPerMeter;
 
-    private int biClrUsed;
+    int biClrUsed;
 
-    private int biClrImportant;
+    int biClrImportant;
 
     public Bmp(final String fileName) {
         try {

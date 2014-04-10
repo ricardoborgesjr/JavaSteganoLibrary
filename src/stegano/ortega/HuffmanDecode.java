@@ -267,7 +267,7 @@ public class HuffmanDecode {
         return 0;
     }
 
-    protected void closeStream() {
+    private void closeStream() {
         // Close input stream
         try {
             this.dis.close(); // close io stream to file

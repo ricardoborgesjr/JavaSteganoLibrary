@@ -55,7 +55,7 @@ public class JpegEncoder extends Frame {
 
     int code;
 
-    protected static int[] jpegNaturalOrder = {
+    public static int[] jpegNaturalOrder = {
             0, 1, 8, 16, 9, 2, 3, 10, 17, 24, 32, 25, 18, 11, 4, 5, 12, 19, 26, 33, 40, 48, 41, 34, 27, 20, 13, 6, 7,
             14, 21, 28, 35, 42, 49, 56, 57, 50, 43, 36, 29, 22, 15, 23, 30, 37, 44, 51, 58, 59, 52, 45, 38, 31, 39, 46,
             53, 60, 61, 54, 47, 55, 62, 63, };
@@ -673,16 +673,16 @@ public class JpegEncoder extends Frame {
         DHT4[1] = (byte) 0xC4;
         for (i = 0; i < 4; i++) {
             bytes = 0;
-            DHT1[index++ - oldindex] = (byte) this.Huf.bits.get(i)[0];
+            DHT1[index++ - oldindex] = (byte) this.Huf.bits.elementAt(i)[0];
             for (j = 1; j < 17; j++) {
-                temp = this.Huf.bits.get(i)[j];
+                temp = this.Huf.bits.elementAt(i)[j];
                 DHT1[index++ - oldindex] = (byte) temp;
                 bytes += temp;
             }
             intermediateindex = index;
             DHT2 = new byte[bytes];
             for (j = 0; j < bytes; j++) {
-                DHT2[index++ - intermediateindex] = (byte) this.Huf.val.get(i)[j];
+                DHT2[index++ - intermediateindex] = (byte) this.Huf.val.elementAt(i)[j];
             }
             DHT3 = new byte[index];
             java.lang.System.arraycopy(DHT4, 0, DHT3, 0, oldindex);

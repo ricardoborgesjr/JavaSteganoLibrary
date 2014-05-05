@@ -12,7 +12,7 @@ Faça o download da biblioteca [aqui](https://github.com/ricardoborgesjr/JavaSte
 
 ###Incorporando um arquivo em uma imagem
 
-~~java
+```java
 import stegano.f5.Embed;
 
 .
@@ -32,11 +32,10 @@ Embed.embed(imagem, arquivo, imagem_estenografada, senha, qualidade);
 .
 .
 
-~~
-
+```
 ###Extraindo um arquivo de uma imagem esteganografada.
 
-~~java
+```java
 import stegano.f5.Extract;
 
 .
@@ -53,4 +52,4 @@ Extract.extract(imagem_estenografada, arquivo, senha);
 .
 .
 
-~~
+```

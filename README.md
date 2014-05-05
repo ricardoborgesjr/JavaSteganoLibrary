@@ -19,9 +19,9 @@ import stegano.f5.Embed;
 .
 .
 
-File imagem_cobertura = new File(“/Caminho/para/a/imagem.jpg”); //Também suporta o formato BMP
-File arquivo = new File(“/Caminho/para/o/arquivo.file”); // qualquer formato de arquivo
-File imagem_estenografada = new File(“/Caminho/para/onde/sera/criada/a/imagem.jpg”) ;
+File imagem_cobertura = new File("/Caminho/para/a/imagem.jpg"); //Também suporta o formato BMP
+File arquivo = new File("/Caminho/para/o/arquivo.file"); // qualquer formato de arquivo
+File imagem_estenografada = new File("/Caminho/para/onde/sera/criada/a/imagem.jpg") ;
 
 String senha = "s3nh4_5up3secReT4";
 
@@ -42,8 +42,8 @@ import stegano.f5.Extract;
 .
 .
 
-File imagem_estenografada = new File(“/Caminho/da/imagem.jpg”) ;
-File arquivo = new File(“/Caminho/onde/sera/criado/o/arquivo.file”);
+File imagem_estenografada = new File("/Caminho/da/imagem.jpg") ;
+File arquivo = new File("/Caminho/onde/sera/criado/o/arquivo.file");
 String senha = "s3nh4_5up3secReT4"; //Deve ser a mesma senha utilizada para imcorporação
 
 Extract.extract(imagem_estenografada, arquivo, senha);

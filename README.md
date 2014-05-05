@@ -3,7 +3,7 @@
 Java library that implements the steganographic algorithm F5
 
 Usage
-Comming soon.
+Coming soon.
 ##Pt_BR
 Biblioteca Java que implementa o algorítimo esteganográfico F5
 

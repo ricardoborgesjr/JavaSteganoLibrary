@@ -1,4 +1,4 @@
- #JavaSteganoLibrary
+#JavaSteganoLibrary
 ##En_US
 Java library that implements the steganographic algorithm F5
 

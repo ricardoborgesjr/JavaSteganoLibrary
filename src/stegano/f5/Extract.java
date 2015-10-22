@@ -1,3 +1,21 @@
+/**
+*    Java Stegano Library
+*    Copyright (C) 2014-2015  Ricardo Borges Jr.
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU General Public License as published by
+*    the Free Software Foundation, either version 3 of the License, or
+*    (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU General Public License for more details.
+*
+*    You should have received a copy of the GNU General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**/
+
 package stegano.f5;
 
 import java.io.File;
@@ -8,16 +26,49 @@ import stegano.crypt.F5Random;
 import stegano.crypt.Permutation;
 import stegano.ortega.HuffmanDecode;
 
+/**
+ *
+ * @author Ricardo Borges Jr.
+ * Based on the implementation of Andreas Westfeld 
+ */
 
 public class Extract {
-    //private static File f;	    // carrier file
-    private static byte[] carrier;  // carrier data
-    private static int[] coeff;     // dct values
-    //private static FileOutputStream fos;   // embedded file (output file)
-    //private static String embFileName;	// output file name
-    //private static String password;
+    
+    private byte[] carrier;  // carrier data
+    private int[] coeff;     // dct values
+   
+    private String password;
+    private File stegImage;
+    private File file;
 
-    private static byte[] deZigZag = {
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+    public void setStegImage(File carrierImage)
+    {
+        this.stegImage = carrierImage;
+    }
+    public void setFile(File embFileName)
+    {
+        this.file = embFileName;
+    }
+
+    public String getPassword()
+    {
+        return this.password;
+    }
+    public File getStegImage()
+    {
+        return this.stegImage;
+    }
+    public File getFile()    
+    {
+        return this.file;
+    }
+
+    private byte[] deZigZag = {
        0,  1,  5,  6, 14, 15, 27, 28,
        2,  4,  7, 13, 16, 26, 29, 42,
        3,  8, 12, 17, 25, 30, 41, 43,
@@ -28,43 +79,52 @@ public class Extract {
       35, 36, 48, 49, 57, 58, 62, 63
     };
 
-    public static void extract(File carrierImage, File embFileName, final String password) {
 
-	try {
-	    carrier = new byte[(int)carrierImage.length()];
-	    final FileInputStream fis = new FileInputStream(carrierImage);
-	    final FileOutputStream fos = new FileOutputStream(new File(embFileName.getAbsolutePath().toString()));
-	    fis.read(carrier);
-            final HuffmanDecode hd = new HuffmanDecode(carrier);
-            System.out.println("Huffman decoding starts");
-            coeff = hd.decode();
-            System.out.println("Permutation starts");
-            final F5Random random = new F5Random(password.getBytes());
-            final Permutation permutation = new Permutation(coeff.length, random);
-            System.out.println(coeff.length + " indices shuffled");
-            int extractedByte = 0;
-            int availableExtractedBits = 0;
-            int extractedFileLength = 0;
-            int nBytesExtracted = 0;
-            int shuffledIndex = 0;
-            int extractedBit;
-            int i;
-            System.out.println("Extraction starts");
-            // extract length information
-            for (i = 0; availableExtractedBits < 32; i++) {
-                shuffledIndex = permutation.getShuffled(i);
-                if (shuffledIndex % 64 == 0) {
-                    continue; // skip DC coefficients
-                }
-                shuffledIndex = shuffledIndex - shuffledIndex % 64 + deZigZag[shuffledIndex % 64];
-                if (coeff[shuffledIndex] == 0) {
-                    continue; // skip zeroes
-                }
-                if (coeff[shuffledIndex] > 0) {
-                    extractedBit = coeff[shuffledIndex] & 1;
-                } else {
-                    extractedBit = 1 - (coeff[shuffledIndex] & 1);
-                }
+    public void extract()
+    {
+
+    try {
+        carrier = new byte[(int)this.stegImage.length()];
+        final FileInputStream fis = new FileInputStream(this.stegImage);
+        final FileOutputStream fos = new FileOutputStream(new File(this.file.getAbsolutePath().toString()));
+        fis.read(carrier);
+        final HuffmanDecode hd = new HuffmanDecode(carrier);
+        System.out.println("Huffman decoding starts");
+        coeff = hd.decode();
+        System.out.println("Permutation starts");
+        
+        final F5Random random = new F5Random(this.password.getBytes());
+        final Permutation permutation = new Permutation(coeff.length, random);
+        System.out.println(coeff.length + " indices shuffled");
+        int extractedByte = 0;
+        int availableExtractedBits = 0;
+        int extractedFileLength = 0;
+        int nBytesExtracted = 0;
+        int shuffledIndex = 0;
+        int extractedBit;
+        int i;
+        System.out.println("Extraction starts");
+        // extract length information
+        for (i = 0; availableExtractedBits < 32; i++)
+        {
+            shuffledIndex = permutation.getShuffled(i);
+            if (shuffledIndex % 64 == 0)
+            {
+                continue; // skip DC coefficients
+            }
+            shuffledIndex = shuffledIndex - shuffledIndex % 64 + deZigZag[shuffledIndex % 64];
+            if (coeff[shuffledIndex] == 0)
+            {
+                continue; // skip zeroes
+            }
+            if (coeff[shuffledIndex] > 0) 
+            {
+                extractedBit = coeff[shuffledIndex] & 1;
+            } 
+            else 
+            {
+                extractedBit = 1 - (coeff[shuffledIndex] & 1);
+            }
                 extractedFileLength |= extractedBit << availableExtractedBits++;
             }
             // remove pseudo random pad
@@ -161,8 +221,8 @@ public class Extract {
                 System.out.println("Incomplete file: only " + nBytesExtracted + " of " + extractedFileLength
                         + " bytes extracted");
             }
-	} catch(Exception e) {
-	    e.printStackTrace();
-	}
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
     }
 }
